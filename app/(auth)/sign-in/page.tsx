@@ -68,7 +68,7 @@ export default function LoginForm() {
 
       toast.success('Login successful!');
 
-      router.push(searchParam || '/dashboard');
+      router.push(searchParam || '/');
     } catch (e) {
       toast.error('Login failed!', {
         description: 'Please check your credentials and try again.',

@@ -1,3 +1,4 @@
+'use client';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -18,15 +19,16 @@ interface DeleteDialogPopupProps {
   model: string;
 }
 
-function handleContinue(rowid: string, model: string) {
-  const router = useRouter();
-  console.log(rowid, model);
-  toast.success('Record deleted successfully');
-  router.refresh();
-  return;
-}
-
 export default function ({ rowid, model }: DeleteDialogPopupProps) {
+  const router = useRouter();
+
+  function handleContinue(rowid: string, model: string) {
+    console.log(rowid, model);
+    toast.success('Record deleted successfully');
+    router.refresh();
+    return;
+  }
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>

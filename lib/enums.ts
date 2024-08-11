@@ -53,49 +53,49 @@ export const sideBarItems = [
     href: '/',
     icon: Home,
   },
-  {
-    label: 'Auctions',
-    href: '/auctions',
-    icon: NotebookPen,
-  },
-  {
-    label: 'Inspections',
-    href: '/inspections',
-    icon: ShieldAlert,
-  },
-  {
-    label: 'Dealer Vehicle',
-    href: '/dealer-vehicle',
-    icon: CarFront,
-  },
-  {
-    label: 'Vehicle Enquery',
-    href: '/vehicle-enquery',
-    icon: Car,
-  },
-  {
-    label: 'Brands',
-    href: '/brands',
-    icon: Package,
-  },
+  // {
+  //   label: 'Auctions',
+  //   href: '/auctions',
+  //   icon: NotebookPen,
+  // },
+  // {
+  //   label: 'Inspections',
+  //   href: '/inspections',
+  //   icon: ShieldAlert,
+  // },
+  // {
+  //   label: 'Dealer Vehicle',
+  //   href: '/dealer-vehicle',
+  //   icon: CarFront,
+  // },
+  // {
+  //   label: 'Vehicle Enquery',
+  //   href: '/vehicle-enquery',
+  //   icon: Car,
+  // },
+  // {
+  //   label: 'Brands',
+  //   href: '/brands',
+  //   icon: Package,
+  // },
   {
     label: 'Users',
     href: '/users',
     icon: Users,
   },
-  {
-    label: 'Inspectors',
-    href: '/inspectors',
-    icon: Users,
-  },
-  {
-    label: 'Colors',
-    href: '/colors',
-    icon: PaintRoller,
-  },
-  {
-    label: 'RTOs',
-    href: '/rtos',
-    icon: Warehouse,
-  },
+  // {
+  //   label: 'Inspectors',
+  //   href: '/inspectors',
+  //   icon: Users,
+  // },
+  // {
+  //   label: 'Colors',
+  //   href: '/colors',
+  //   icon: PaintRoller,
+  // },
+  // {
+  //   label: 'RTOs',
+  //   href: '/rtos',
+  //   icon: Warehouse,
+  // },
 ];

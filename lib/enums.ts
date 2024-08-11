@@ -50,7 +50,7 @@ export const adminStatuses = [
 export const sideBarItems = [
   {
     label: 'Dashboard',
-    href: '/dashboard',
+    href: '/',
     icon: Home,
   },
   {

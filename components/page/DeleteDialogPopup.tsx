@@ -11,14 +11,18 @@ import {
 } from '@/components/ui/alert-dialog';
 import { toast } from 'sonner';
 import { DropdownMenuItem } from '../ui/dropdown-menu';
+import { useRouter } from 'next/navigation';
+
 interface DeleteDialogPopupProps {
   rowid: string;
   model: string;
 }
 
 function handleContinue(rowid: string, model: string) {
+  const router = useRouter();
   console.log(rowid, model);
   toast.success('Record deleted successfully');
+  router.refresh();
   return;
 }
 

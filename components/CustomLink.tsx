@@ -12,7 +12,6 @@ interface CustomLinkProps {
 
 export function CustomLink({ href, label, view, Component }: CustomLinkProps) {
   const pathname = usePathname();
-
   return (
     <Link
       href={href}
@@ -24,7 +23,7 @@ export function CustomLink({ href, label, view, Component }: CustomLinkProps) {
                         : 'rounded-xl gap-4 hover:text-foreground mx-[-0.65rem]'
                     }
                     ${
-                      pathname.split('/')[1] === href
+                      pathname === href
                         ? 'bg-muted text-primary'
                         : 'text-muted-foreground'
                     }

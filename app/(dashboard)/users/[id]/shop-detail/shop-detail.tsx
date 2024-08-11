@@ -21,6 +21,9 @@ import { models } from '@/app/firebase/models';
 import { toast } from 'sonner';
 import { User, userSchema } from '@/lib/schema';
 import { useRouter } from 'next/navigation';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { getUserProfileData, updateUserProfileData } from '@/actions/actions';
+import SubmitButton from '@/components/custom/SubmitButton';
 
 export function ShopDetail({ user, id }: { user: User; id: string }) {
   const router = useRouter();
@@ -39,16 +42,28 @@ export function ShopDetail({ user, id }: { user: User; id: string }) {
     mode: 'onChange',
   });
 
+  const { data: userProfile, isPending: isDataFetchPending } = useQuery({
+    queryKey: [models.users],
+    queryFn: async () => await getUserProfileData(id),
+    enabled: false,
+  });
+
+  const { mutate, isPending: isDataSubmitPending } = useMutation({
+    mutationFn: updateUserProfileData,
+    onSuccess: () => {
+      toast.success('Profile Data is Updated');
+      router.refresh();
+    },
+    onError: error => {
+      toast.error('An error occurred while updating the profile');
+      console.error(error);
+    },
+  });
+
   async function onSubmit(data: User) {
-    const user = (await getDoc(doc(db, models.users, id))).data();
-    if (!user) return;
-    if (data.shop) {
-      data.shop.name = user.dealerOnboardFormData?.shopName;
-      data.updatedAt = new Date().getTime();
-      await setDoc(doc(db, models.users, id), data, { merge: true });
-    }
-    toast.success('Profile Data is Updated');
-    router.refresh();
+    if (userProfile && data.shop)
+      data.shop.name = userProfile.dealerOnboardFormData?.shopName;
+    mutate({ data, id });
   }
 
   return (
@@ -166,7 +181,10 @@ export function ShopDetail({ user, id }: { user: User; id: string }) {
             )}
           />
         </div>
-        <Button type="submit">Update profile</Button>
+        <SubmitButton
+          isPending={isDataFetchPending && isDataSubmitPending}
+          text="Update Profile"
+        />
       </form>
     </Form>
   );

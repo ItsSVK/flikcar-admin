@@ -20,6 +20,7 @@ import { db } from '@/app/firebase/firebase';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { User } from '@/lib/schema';
+import SubmitButton from '@/components/custom/SubmitButton';
 
 const formSchema = z.object({
   file: z
@@ -128,9 +129,7 @@ export default function ({
             >
               View
             </Button>
-            <Button className="w-full" type="submit">
-              Upload
-            </Button>
+            <SubmitButton isPending={false} text="Upload" />
           </CardFooter>
         </form>
       </Form>

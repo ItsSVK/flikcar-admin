@@ -2,9 +2,6 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-
-import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -15,11 +12,11 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { User, userSchema } from '../../../../../lib/schema';
-import { doc, setDoc } from 'firebase/firestore';
-import { db } from '@/app/firebase/firebase';
-import { models } from '@/app/firebase/models';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { updateUserProfileData } from '@/actions/actions';
+import { useMutation } from '@tanstack/react-query';
+import SubmitButton from '@/components/custom/SubmitButton';
 
 export function DealerDetail({ user, id }: { user: User; id: string }) {
   const router = useRouter();
@@ -46,12 +43,19 @@ export function DealerDetail({ user, id }: { user: User; id: string }) {
     mode: 'onChange',
   });
 
-  async function onSubmit(data: User) {
-    data.updatedAt = new Date().getTime();
-    await setDoc(doc(db, models.users, id), data, { merge: true });
-    toast.success('Dealer Data is Updated');
-    router.refresh();
-  }
+  const { mutate, isPending } = useMutation({
+    mutationFn: updateUserProfileData,
+    onSuccess: () => {
+      toast.success('Profile Data is Updated');
+      router.refresh();
+    },
+    onError: error => {
+      toast.error('An error occurred while updating the profile');
+      console.error(error);
+    },
+  });
+
+  const onSubmit = (data: User) => mutate({ data, id });
 
   return (
     <Form {...form}>
@@ -209,7 +213,7 @@ export function DealerDetail({ user, id }: { user: User; id: string }) {
             )}
           />
         </div>
-        <Button type="submit">Update profile</Button>
+        <SubmitButton isPending={isPending} text="Update Profile" />
       </form>
     </Form>
   );

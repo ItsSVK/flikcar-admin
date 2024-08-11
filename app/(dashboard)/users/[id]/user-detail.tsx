@@ -2,13 +2,9 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-
-import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -23,13 +19,11 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { User, userSchema } from '../../../../lib/schema';
-import { db } from '@/app/firebase/firebase';
-import { doc, setDoc } from 'firebase/firestore';
-import { models } from '@/app/firebase/models';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateUserProfile } from '@/actions/actions';
+import { useMutation } from '@tanstack/react-query';
+import { updateUserProfileData } from '@/actions/actions';
+import SubmitButton from '@/components/custom/SubmitButton';
 
 export function UserDetail({ user, id }: { user: User; id: string }) {
   const defaultValues: Partial<User> = {
@@ -47,28 +41,20 @@ export function UserDetail({ user, id }: { user: User; id: string }) {
   });
 
   const router = useRouter();
-  // const queryClient = useQueryClient();
 
-  // const { mutate } = useMutation({
-  //   mutationFn: updateUserProfile,
-  //   onSuccess: () => {
-  //     toast.success('Profile Data is Updated');
-  //     // queryClient.invalidateQueries(['user', id]); // Invalidate and refetch user data if needed
-  //     router.refresh(); // Optionally refresh the page or route
-  //   },
-  //   onError: error => {
-  //     toast.error('An error occurred while updating the profile');
-  //     console.error(error);
-  //   },
-  // });
+  const { mutate, isPending } = useMutation({
+    mutationFn: updateUserProfileData,
+    onSuccess: () => {
+      toast.success('Profile Data is Updated');
+      router.refresh();
+    },
+    onError: error => {
+      toast.error('An error occurred while updating the profile');
+      console.error(error);
+    },
+  });
 
-  // const onSubmit = (data: User) => mutate({ data, id });
-
-  async function onSubmit(data: User) {
-    await setDoc(doc(db, models.users, id), data, { merge: true });
-    toast.success('Profile Data is Updated');
-    router.refresh();
-  }
+  const onSubmit = (data: User) => mutate({ data, id });
 
   return (
     <Form {...form}>
@@ -130,7 +116,7 @@ export function UserDetail({ user, id }: { user: User; id: string }) {
             </FormItem>
           )}
         />
-        <Button type="submit">Update profile</Button>
+        <SubmitButton isPending={isPending} text="Update Profile" />
       </form>
     </Form>
   );

@@ -11,5 +11,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <Sidebar children={children} />;
+  return <Sidebar>{children}</Sidebar>;
 }

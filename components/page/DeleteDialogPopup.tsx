@@ -19,7 +19,10 @@ interface DeleteDialogPopupProps {
   model: string;
 }
 
-export default function ({ rowid, model }: DeleteDialogPopupProps) {
+export default function DeleteDialogPopupComponent({
+  rowid,
+  model,
+}: DeleteDialogPopupProps) {
   const router = useRouter();
 
   function handleContinue(rowid: string, model: string) {

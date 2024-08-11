@@ -34,7 +34,7 @@ const formSchema = z.object({
 
 type DocsImagePaths = { type?: string; path?: string };
 
-export default function ({
+export default function Image({
   docsImagePaths,
   userId,
 }: {

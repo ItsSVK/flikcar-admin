@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button';
 import { LoaderCircle } from 'lucide-react';
 
-export default function ({
+export default function SubmitButtonComponent({
   isPending,
   text,
 }: {

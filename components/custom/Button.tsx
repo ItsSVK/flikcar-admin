@@ -3,7 +3,13 @@ import { Button } from '@/components/ui/button';
 import { PlusCircle } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-export default function ({ content, link }: { content: string; link: string }) {
+export default function ButtonComponent({
+  content,
+  link,
+}: {
+  content: string;
+  link: string;
+}) {
   const router = useRouter();
   return (
     <Button size="sm" onClick={() => router.push(link)} className="gap-2">

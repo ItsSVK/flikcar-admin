@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import React from 'react';
 
 interface ImageGalleryProps {
@@ -15,13 +16,23 @@ export function ImageGallery({
   return (
     <div className="image-gallery">
       {images.map((image, index) => (
-        <img
+        // <img
+        //   key={index}
+        //   src={image}
+        //   alt={`Image ${index + 1}`}
+        //   onClick={() => onImageClick(image)}
+        //   className={fullScreenImage === image ? 'fullscreen' : ''}
+        //   style={{ cursor: 'pointer' }} // Added cursor style to indicate clickable image
+        // />
+        <Image
           key={index}
           src={image}
           alt={`Image ${index + 1}`}
           onClick={() => onImageClick(image)}
           className={fullScreenImage === image ? 'fullscreen' : ''}
           style={{ cursor: 'pointer' }} // Added cursor style to indicate clickable image
+          width={200}
+          height={200}
         />
       ))}
     </div>

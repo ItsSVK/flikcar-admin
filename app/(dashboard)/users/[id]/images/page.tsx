@@ -23,7 +23,7 @@ type DocsImagePaths = {
   path: string;
 };
 
-export default async function ({ params }: UserDetailProps) {
+export default async function Image({ params }: UserDetailProps) {
   const user: User = (
     await getDoc(doc(db, models.users, params.id))
   ).data() as User;
@@ -55,6 +55,7 @@ export default async function ({ params }: UserDetailProps) {
     <div className="grid grid-cols-1 sm:grid-cols-2">
       {types.map(type => (
         <ImageCardWithForm
+          key={type}
           docsImagePaths={
             docsImagePaths.find(
               (obj: DocsImagePaths) => obj.type === type

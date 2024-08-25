@@ -1,5 +1,4 @@
 'use client';
-import { Suspense } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -40,10 +39,7 @@ const defaultValues: Partial<SignInFormValues> = {
 
 export default function LoginForm() {
   const router = useRouter();
-  const searchParam = '';
-  // typeof window !== 'undefined'
-  //   ? new URLSearchParams(window.location.search).get('redirect')
-  //   : null;
+  const searchParam = useSearchParams().get('redirect');
 
   const form = useForm<SignInFormValues>({
     resolver: zodResolver(signInFormSchema),
@@ -77,55 +73,49 @@ export default function LoginForm() {
   }
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <Card className="w-full max-w-sm">
-            <CardHeader>
-              <CardTitle className="text-2xl">Login</CardTitle>
-              <CardDescription>
-                Enter your email below to login to your account.
-              </CardDescription>
-            </CardHeader>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <Card className="w-full max-w-sm">
+          <CardHeader>
+            <CardTitle className="text-2xl">Login</CardTitle>
+            <CardDescription>
+              Enter your email below to login to your account.
+            </CardDescription>
+          </CardHeader>
 
-            <CardContent className="grid gap-4">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Email" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Password</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Password"
-                        type="password"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </CardContent>
-            <CardFooter>
-              <Button className="w-full">Sign in</Button>
-            </CardFooter>
-          </Card>
-        </form>
-      </Form>
-    </Suspense>
+          <CardContent className="grid gap-4">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Email" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Password" type="password" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </CardContent>
+          <CardFooter>
+            <Button className="w-full">Sign in</Button>
+          </CardFooter>
+        </Card>
+      </form>
+    </Form>
   );
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
   title: 'Login',
@@ -11,8 +12,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex flex-column min-h-screen justify-center items-center">
-      {children}
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="flex flex-column min-h-screen justify-center items-center">
+        {children}
+      </div>
+    </Suspense>
   );
 }

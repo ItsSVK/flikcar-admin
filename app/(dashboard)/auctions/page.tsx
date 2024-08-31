@@ -4,9 +4,8 @@ import { DataTable } from '../../../components/datatable/data-table';
 import { db } from '@/app/firebase/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { models } from '@/app/firebase/models';
-import { Auction, auctionSchema } from '../../../lib/schema';
+import { Auction } from '../../../lib/schema';
 import { columns } from './columns';
-import { userStatuses } from '@/lib/enums';
 
 export const metadata: Metadata = {
   title: 'Auctions',

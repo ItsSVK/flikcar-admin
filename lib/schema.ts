@@ -75,6 +75,35 @@ export const colorSchema = z.object({
   code: z.string().optional(),
 });
 
+export const auctionSchema = z.object({
+  id: z.string(),
+  isSoldOut: z.boolean().optional().nullable(),
+  endTime: z.number().optional(),
+  oneClickBuyPrice: z.number().optional().nullable(),
+  startPrice: z.number().optional().nullable(),
+  startTime: z.number().optional(),
+  latestBid: z.object({}).optional().nullable(),
+  carDetails: z
+    .object({
+      bodyType: z.string().optional().nullable(),
+      brand: z.string().optional().nullable(),
+      city: z.string().optional().nullable(),
+      color: z.string().optional().nullable(),
+      fuelType: z.string().optional().nullable(),
+      id: z.string().optional().nullable(),
+      imagePath: z.string().optional().nullable(),
+      kmsDriven: z.number().optional().nullable(),
+      model: z.string().optional().nullable(),
+      ownerType: z.string().optional().nullable(),
+      registrationYear: z.number().optional().nullable(),
+      seat: z.number().optional().nullable(),
+      transmission: z.string().optional().nullable(),
+      variant: z.string().optional().nullable(),
+    })
+    .optional()
+    .nullable(),
+});
+
 export const rtoSchema = z.object({
   id: z.string(),
   rtoName: z.string().optional().nullable(),
@@ -85,3 +114,4 @@ export type Admin = z.infer<typeof adminSchema>;
 export type Color = z.infer<typeof colorSchema>;
 export type RTO = z.infer<typeof rtoSchema>;
 export type User = z.infer<typeof userSchema>;
+export type Auction = z.infer<typeof auctionSchema>;

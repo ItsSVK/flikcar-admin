@@ -18,6 +18,7 @@ import DeleteDialogPopup from '../page/DeleteDialogPopup';
 // import { ColorDialogPopup } from '@/app/(app)/colors/ColorDialogPopup';
 // import { RTODialogPopup } from '@/app/(app)/rtos/RTODialogPopup';
 import Link from 'next/link';
+import { models } from '@/app/firebase/models';
 interface DataTableRowActionsProps {
   row: any;
   model: string;
@@ -45,6 +46,16 @@ export function DataTableRowActions({ row, model }: DataTableRowActionsProps) {
         )}
         {/* {model === 'colors' && <ColorDialogPopup data={row} />}
         {model === 'rtoLocations' && <RTODialogPopup data={row} />} */}
+        {model === models.auction && (
+          <>
+            <Link href={pathname + '/' + row.id + '/bids'}>
+              <DropdownMenuItem>View BIDs</DropdownMenuItem>
+            </Link>
+            <Link href={pathname + '/' + row.id}>
+              <DropdownMenuItem>Edit</DropdownMenuItem>
+            </Link>
+          </>
+        )}
         <DropdownMenuSeparator />
         <DeleteDialogPopup rowid={row.id} model={model} />
       </DropdownMenuContent>

@@ -17,8 +17,6 @@ export default async function UserDetailPage({ params }: UserDetailProps) {
     await getDoc(doc(collection(db, models.users), params.id))
   ).data() as User;
 
-  console.log(user);
-
   return (
     <div className="space-y-6">
       <div>

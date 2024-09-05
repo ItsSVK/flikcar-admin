@@ -1,11 +1,9 @@
 import { Metadata } from 'next';
 
 import { DataTable } from '../../../components/datatable/data-table';
-import { db } from '@/app/firebase/firebase';
-import { collection, getDocs } from 'firebase/firestore';
-import { models } from '@/app/firebase/models';
 import { Auction } from '../../../lib/schema';
 import { columns } from './columns';
+import { getAuctions } from '@/app/firebase/dbServices';
 
 export const metadata: Metadata = {
   title: 'Auctions',
@@ -13,14 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function AuctionPage() {
-  const auctions: Auction[] = (
-    await getDocs(collection(db, models.auction))
-  ).docs.map(doc => {
-    return {
-      id: doc.id,
-      ...doc.data(),
-    } as Auction;
-  });
+  const auctions: Auction[] = await getAuctions();
   return (
     <>
       <div className="h-full flex-1 flex-col space-y-8 p-8 md:flex">

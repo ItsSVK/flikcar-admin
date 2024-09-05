@@ -1,10 +1,8 @@
-import { db } from '@/app/firebase/firebase';
-import { models } from '@/app/firebase/models';
-import { doc, getDoc } from 'firebase/firestore';
 import dynamic from 'next/dynamic';
 import { redirect } from 'next/navigation';
 import { UserDetailProps } from '../page';
 import { User } from '@/lib/schema';
+import { getUser } from '@/app/firebase/dbServices';
 const ImageCardWithForm = dynamic(() => import('./images'), {
   ssr: false,
 });
@@ -24,9 +22,7 @@ type DocsImagePaths = {
 };
 
 export default async function Image({ params }: UserDetailProps) {
-  const user: User = (
-    await getDoc(doc(db, models.users, params.id))
-  ).data() as User;
+  const user = (await getUser(params.id)) as User;
 
   if (!user) return redirect('/users');
 

@@ -13,9 +13,9 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { getAuth, signOut } from 'firebase/auth';
+import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
-import { app } from '@/app/firebase/firebase';
+import { auth } from '@/app/firebase/firebase';
 import { CustomLink } from '../CustomLink';
 import { sideBarItems } from '@/lib/enums';
 
@@ -104,7 +104,7 @@ export function Sidebar({ children }: { children: React.ReactNode }) {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
                   onClick={async () => {
-                    signOut(getAuth(app));
+                    signOut(auth);
                     await fetch('/api/logout');
                     route.push('/sign-in');
                   }}

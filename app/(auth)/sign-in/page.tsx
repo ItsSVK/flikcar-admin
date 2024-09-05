@@ -23,8 +23,8 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { app } from '@/app/firebase/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '@/app/firebase/firebase';
 
 const signInFormSchema = z.object({
   email: z.string().email('Please enter a valid email'),
@@ -49,7 +49,7 @@ export default function LoginForm() {
   async function onSubmit(data: SignInFormValues) {
     try {
       const credential = await signInWithEmailAndPassword(
-        getAuth(app),
+        auth,
         data.email,
         data.password
       );

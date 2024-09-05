@@ -21,19 +21,20 @@ import SubmitButton from '@/components/custom/SubmitButton';
 export function DealerDetail({ user, id }: { user: User; id: string }) {
   const router = useRouter();
 
-  const defaultValues: Partial<User> = {
+  const defaultValues: Pick<User, 'dealerOnboardFormData'> = {
     dealerOnboardFormData: {
-      name: user.dealerOnboardFormData?.name,
-      email: user.dealerOnboardFormData?.email,
-      shopName: user.dealerOnboardFormData?.shopName,
-      shopAddress: user.dealerOnboardFormData?.shopAddress,
-      selectedState: user.dealerOnboardFormData?.selectedState,
-      selectedCity: user.dealerOnboardFormData?.selectedCity,
-      pinCode: user.dealerOnboardFormData?.pinCode,
-      panCardNumber: user.dealerOnboardFormData?.panCardNumber,
-      addressProofNumber: user.dealerOnboardFormData?.addressProofNumber,
-      tradeLicenseNumber: user.dealerOnboardFormData?.tradeLicenseNumber,
-      cancelledChequeNumber: user.dealerOnboardFormData?.cancelledChequeNumber,
+      name: user.dealerOnboardFormData?.name ?? '',
+      email: user.dealerOnboardFormData?.email ?? '',
+      shopName: user.dealerOnboardFormData?.shopName ?? '',
+      shopAddress: user.dealerOnboardFormData?.shopAddress ?? '',
+      selectedState: user.dealerOnboardFormData?.selectedState ?? '',
+      selectedCity: user.dealerOnboardFormData?.selectedCity ?? '',
+      pinCode: user.dealerOnboardFormData?.pinCode ?? '',
+      panCardNumber: user.dealerOnboardFormData?.panCardNumber ?? '',
+      addressProofNumber: user.dealerOnboardFormData?.addressProofNumber ?? '',
+      tradeLicenseNumber: user.dealerOnboardFormData?.tradeLicenseNumber ?? '',
+      cancelledChequeNumber:
+        user.dealerOnboardFormData?.cancelledChequeNumber ?? '',
     },
   };
 

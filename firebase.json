@@ -1,5 +1,7 @@
 {
   "hosting": {
+    "site": "flikcarapp-7589a",
+    "public": "public",
     "source": ".",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "frameworksBackend": {

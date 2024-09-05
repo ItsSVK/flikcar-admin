@@ -115,3 +115,10 @@ export type Color = z.infer<typeof colorSchema>;
 export type RTO = z.infer<typeof rtoSchema>;
 export type User = z.infer<typeof userSchema>;
 export type Auction = z.infer<typeof auctionSchema>;
+
+export interface FirebaseAdminConfig {
+  projectId: string;
+  clientEmail: string;
+  privateKey: string;
+  storageBucket: string;
+}

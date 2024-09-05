@@ -1,10 +1,8 @@
 import { Separator } from '@/components/ui/separator';
 import { UserDetail } from './user-detail';
-import { db } from '@/app/firebase/firebase';
-import { collection, getDoc, doc } from 'firebase/firestore'; // Added 'doc' import
-import { models } from '@/app/firebase/models';
 import { User } from '../../../../lib/schema';
 import { Metadata } from 'next';
+import { getUser } from '@/app/firebase/dbServices';
 
 export type UserDetailProps = { params: { id: string } };
 export const metadata: Metadata = {
@@ -13,9 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function UserDetailPage({ params }: UserDetailProps) {
-  const user = (
-    await getDoc(doc(collection(db, models.users), params.id))
-  ).data() as User;
+  const user = (await getUser(params.id)) as User;
 
   return (
     <div className="space-y-6">

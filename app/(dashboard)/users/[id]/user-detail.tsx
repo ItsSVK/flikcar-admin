@@ -26,10 +26,10 @@ import { updateUserProfileData } from '@/actions/actions';
 import SubmitButton from '@/components/custom/SubmitButton';
 
 export function UserDetail({ user, id }: { user: User; id: string }) {
-  const defaultValues: Partial<User> = {
+  const defaultValues: Pick<User, 'profile' | 'userTypeStatus'> = {
     profile: {
-      firstName: user.profile?.firstName,
-      lastName: user.profile?.lastName,
+      firstName: user.profile?.firstName ?? '',
+      lastName: user.profile?.lastName ?? '',
     },
     userTypeStatus: user.userTypeStatus,
   };

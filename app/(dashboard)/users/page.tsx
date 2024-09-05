@@ -1,12 +1,10 @@
 import { Metadata } from 'next';
 
 import { DataTable } from '../../../components/datatable/data-table';
-import { db } from '@/app/firebase/firebase';
-import { collection, getDocs } from 'firebase/firestore';
-import { models } from '@/app/firebase/models';
 import { User } from '../../../lib/schema';
 import { columns } from './columns';
 import { userStatuses } from '@/lib/enums';
+import { getUsers } from '@/app/firebase/dbServices';
 
 export const metadata: Metadata = {
   title: 'Users',
@@ -14,14 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default async function UserPage() {
-  const users: User[] = (await getDocs(collection(db, models.users))).docs.map(
-    doc => {
-      return {
-        id: doc.id,
-        ...doc.data(),
-      } as User;
-    }
-  );
+  const users: User[] = await getUsers();
   return (
     <>
       <div className="h-full flex-1 flex-col space-y-8 p-8 md:flex">

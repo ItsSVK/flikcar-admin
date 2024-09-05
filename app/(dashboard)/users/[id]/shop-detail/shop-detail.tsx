@@ -2,9 +2,6 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-
-import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -15,8 +12,6 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 
-import { db } from '@/app/firebase/firebase';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { models } from '@/app/firebase/models';
 import { toast } from 'sonner';
 import { User, userSchema } from '@/lib/schema';
@@ -27,12 +22,12 @@ import SubmitButton from '@/components/custom/SubmitButton';
 
 export function ShopDetail({ user, id }: { user: User; id: string }) {
   const router = useRouter();
-  const defaultValues: Partial<User> = {
+  const defaultValues: Pick<User, 'shop'> = {
     shop: {
-      name: user.shop?.name,
-      phone: user.shop?.phone,
-      gstNumber: user.shop?.gstNumber,
-      addresses: user.shop?.addresses,
+      name: user.shop?.name ?? '',
+      phone: user.shop?.phone ?? '',
+      gstNumber: user.shop?.gstNumber ?? '',
+      addresses: user.shop?.addresses ?? [],
     },
   };
 

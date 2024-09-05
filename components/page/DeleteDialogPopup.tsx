@@ -26,7 +26,6 @@ export default function DeleteDialogPopupComponent({
   const router = useRouter();
 
   function handleContinue(rowid: string, model: string) {
-    console.log(rowid, model);
     toast.success('Record deleted successfully');
     router.refresh();
     return;

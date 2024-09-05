@@ -1,13 +1,9 @@
 import { Separator } from '@/components/ui/separator';
-// import { AccountForm } from '@/app/(app)/examples/forms/account/account-form';
-// import { DealerDetail } from './dealer-detail';
-import { User } from '../../../../../lib/schema';
-import { collection, doc, getDoc } from 'firebase/firestore';
-import { db } from '@/app/firebase/firebase';
-import { models } from '@/app/firebase/models';
 import { Metadata } from 'next';
 import { ShopDetail } from './shop-detail';
 import { UserDetailProps } from '../page';
+import { getUser } from '@/app/firebase/dbServices';
+import { User } from '@/lib/schema';
 
 export const metadata: Metadata = {
   title: 'Shop Details',
@@ -15,9 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ShopDetailPage({ params }: UserDetailProps) {
-  const user = (
-    await getDoc(doc(collection(db, models.users), params.id))
-  ).data() as User;
+  const user = (await getUser(params.id)) as User;
 
   return (
     <div className="space-y-6">

@@ -53,11 +53,16 @@ export const sideBarItems = [
     href: '/',
     icon: Home,
   },
-  // {
-  //   label: 'Auctions',
-  //   href: '/auctions',
-  //   icon: NotebookPen,
-  // },
+  {
+    label: 'Auctions',
+    href: '/auctions',
+    icon: NotebookPen,
+  },
+  {
+    label: 'OCB Vehicle',
+    href: '/ocb-vehicle',
+    icon: NotebookPen,
+  },
   // {
   //   label: 'Inspections',
   //   href: '/inspections',

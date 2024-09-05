@@ -17,6 +17,13 @@ export const updateUserProfileData = async ({
   data: User;
   id: string;
 }) => {
-  data.updatedAt = new Date().getTime();
-  await setDoc(doc(db, models.users, id), data, { merge: true });
+  try {
+    data.updatedAt = new Date().getTime();
+    await setDoc(doc(db, models.users, id), data, { merge: true });
+
+    return data; // Return data if needed for any further operations
+  } catch (error) {
+    console.error('Failed to update profile data:', error);
+    throw new Error('Failed to update profile data'); // Rethrow error for onError callback
+  }
 };

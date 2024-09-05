@@ -32,7 +32,7 @@ import { Badge } from '../ui/badge';
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  filterList: {
+  filterList?: {
     name: string;
     field: string;
     values: { value: string; label: string }[];
